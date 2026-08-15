@@ -6,7 +6,7 @@
 
 > 🎓 **All-in-one academic dashboard for students.** Track tasks, monitor progress, manage schedules, and optimize study sessions — beautifully organized in one place.
 
- **Live Demo:** [Link Demo Lu di Sini]
+ **Live Demo:** [Link Demo]
 📦 **Current Phase:** Frontend Only (v1.0)
 
 ---
