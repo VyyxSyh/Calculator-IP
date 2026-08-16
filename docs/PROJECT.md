@@ -164,9 +164,7 @@ Total Study Time: 2 Hours
 25m Work
 5m Break
 25m Work
-...
-
----
+```
 
 ### 4.7 Search, Filter & Sorting
 
@@ -232,7 +230,7 @@ Pada tahap pengembangan berikutnya:
 ```text
 Frontend
    ↓
-API
+  API
    ↓
 Backend
    ↓
@@ -277,7 +275,7 @@ Setiap user memiliki data masing-masing.
 Contoh:
 
 ```text
-Raffi
+Vyy
 ├── Project IoT → 80%
 └── Mobile Development → 60%
 
@@ -345,7 +343,8 @@ Dengan demikian, data pengguna dapat tersimpan secara terpusat dan dapat diakses
 
 Frontend:
 
-- [To be decided]
+- React
+- Tailwind CSS
 
 Data Storage:
 
@@ -361,7 +360,7 @@ Database:
 
 - [To be decided]
 
-Framework, library, dan teknologi tambahan akan ditentukan berdasarkan kebutuhan project dan hasil diskusi sebelum masuk ke tahap pengembangan lebih lanjut.
+Backend, database, dan teknologi tambahan akan ditentukan berdasarkan kebutuhan project dan hasil diskusi sebelum masuk ke tahap pengembangan lebih lanjut (Phase 2 & 3).
 
 ---
 

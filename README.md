@@ -61,13 +61,13 @@ Currently in **Phase 1 (Frontend Development)**, Nestly runs entirely in the bro
 
 | Component | Technology |
 |-----------|------------|
-| **Frontend** | [To be decided] *(Framework/Library will be updated once finalized)* |
+| **Frontend** | React |
+| **Styling** | Tailwind CSS |
 | **Data Storage** | `localStorage` (Browser-based, zero-server) |
-| **Styling** | Responsive CSS / Utility Framework |
-| **State Management** | Local Storage API + Modular JavaScript |
+| **State Management** | React State/Hooks + Local Storage API |
 | **Deployment** | Static Hosting (GitHub Pages / Vercel / Netlify) |
 
-> 💡 *Note: The specific frontend stack is currently being evaluated for optimal performance and scalability. This README will be updated immediately once the tech decision is made. The current codebase is framework-agnostic and structured for easy migration.*
+> 💡 *Note: Phase 1 is built with React + Tailwind CSS, structured to keep data logic (`localStorage`) modular and decoupled from UI components for easier migration into a full-stack architecture in future phases.*
 
 ---
 

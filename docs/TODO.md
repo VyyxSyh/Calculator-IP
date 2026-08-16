@@ -7,7 +7,7 @@ Checklist pengembangan Nestly, dikelompokkan per fitur sesuai PRD.md. Centang it
 ---
 
 ## 🏗️ Setup & Foundation
-- [ z] Finalisasi tech stack Frontend (framework/library)
+- [ ] Finalisasi tech stack Frontend (framework/library)
 - [ ] Setup project structure (folder, routing, base config)
 - [ ] Setup styling system (utility framework / CSS architecture)
 - [ ] Setup linting & formatting (ESLint/Prettier atau setara)
