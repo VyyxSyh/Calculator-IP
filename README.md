@@ -6,8 +6,9 @@
 
 > 🎓 **All-in-one academic dashboard for students.** Track tasks, monitor progress, manage schedules, and optimize study sessions — beautifully organized in one place.
 
- **Live Demo:** [Link Demo]
-📦 **Current Phase:** Frontend Only (v1.0)
+ **Live Demo :** [Link Demo]
+
+ **Current Phase :** Frontend Only (v1.0)
 
 ---
 
@@ -63,11 +64,9 @@ Currently in **Phase 1 (Frontend Development)**, Nestly runs entirely in the bro
 |-----------|------------|
 | **Frontend** | React |
 | **Styling** | Tailwind CSS |
-| **Data Storage** | `localStorage` (Browser-based, zero-server) |
+| **Data Storage** | `localStorage` |
 | **State Management** | React State/Hooks + Local Storage API |
-| **Deployment** | Static Hosting (GitHub Pages / Vercel / Netlify) |
-
-> 💡 *Note: Phase 1 is built with React + Tailwind CSS, structured to keep data logic (`localStorage`) modular and decoupled from UI components for easier migration into a full-stack architecture in future phases.*
+| **Deployment** | Static Hosting Netlify |
 
 ---
 

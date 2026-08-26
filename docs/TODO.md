@@ -7,11 +7,11 @@ Checklist pengembangan Nestly, dikelompokkan per fitur sesuai PRD.md. Centang it
 ---
 
 ## 🏗️ Setup & Foundation
-- [ ] Finalisasi tech stack Frontend (framework/library)
-- [ ] Setup project structure (folder, routing, base config)
-- [ ] Setup styling system (utility framework / CSS architecture)
-- [ ] Setup linting & formatting (ESLint/Prettier atau setara)
-- [ ] Setup deployment pipeline (GitHub Pages / Vercel / Netlify)
+- [x] Finalisasi tech stack Frontend (framework/library)
+- [x] Setup project structure (folder, routing, base config)
+- [x] Setup styling system (utility framework / CSS architecture)
+- [x] Setup linting & formatting (ESLint/Prettier atau setara)
+- [x] Setup deployment pipeline (GitHub Pages / Vercel / Netlify)
 - [ ] Buat struktur data dasar (schema task, schedule, theme) di `localStorage`
 
 ## ✅ Task Management
