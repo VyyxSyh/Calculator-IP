@@ -410,3 +410,42 @@ Project diharapkan menjadi web application yang dapat membantu mahasiswa mengelo
 Versi awal akan berfungsi sebagai Frontend application yang dapat digunakan secara lokal dan di-host sebagai static website.
 
 Project kemudian dapat dikembangkan secara bertahap menjadi Full-stack Application tanpa harus membangun ulang seluruh Frontend dari awal.
+
+## 12. Color System 
+
+### Light Mode
+
+| Token | Color | Hex | Usage |
+|---|---|---|---|
+| Primary | Mint Teal | `#2A9D8F` | Primary buttons, active states, links, main accents |
+| Secondary | Soft Teal | `#52B7A9` | Secondary actions, supporting accents |
+| Tertiary | Pale Mint | `#D8EFEB` | Subtle backgrounds, badges, highlights |
+| Background | Warm Off-White | `#F5F4F0` | Main page background |
+| Surface | White | `#FFFFFF` | Cards, navbar, panels, modals |
+| Text | Charcoal | `#202522` | Headings and primary text |
+| Text Muted | Muted Gray-Green | `#68716D` | Descriptions, metadata, secondary text |
+| Border | Soft Gray-Green | `#D9DEDA` | Borders, dividers, input outlines |
+
+### Dark Mode
+
+| Token | Color | Hex | Usage |
+|---|---|---|---|
+| Primary | Bright Mint | `#5FD1C2` | Primary buttons, active states, links, main accents |
+| Secondary | Deep Teal | `#3BAFA2` | Secondary actions, supporting accents |
+| Tertiary | Dark Teal | `#163D39` | Subtle backgrounds, badges, highlights |
+| Background | Deep Charcoal | `#0D1211` | Main page background |
+| Surface | Dark Charcoal | `#151B19` | Cards, navbar, panels, modals |
+| Text | Soft White | `#EAF3F0` | Headings and primary text |
+| Text Muted | Muted Gray | `#9AA9A4` | Descriptions, metadata, secondary text |
+| Border | Dark Gray-Teal | `#293531` | Borders, dividers, input outlines |
+
+### Color Usage Guidelines
+
+- **Primary** should be used for the main brand identity and important interactive elements.
+- **Secondary** should support primary actions without competing with them.
+- **Tertiary** should be used for subtle visual emphasis rather than large areas.
+- **Background** is reserved for the main application canvas.
+- **Surface** is used for elevated UI elements such as cards, panels, and navigation.
+- **Text** is used for primary content and headings.
+- **Text Muted** is used for secondary information and supporting content.
+- **Border** should remain subtle and should not overpower the content.
