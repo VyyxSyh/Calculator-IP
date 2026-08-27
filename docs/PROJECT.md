@@ -449,3 +449,20 @@ Project kemudian dapat dikembangkan secara bertahap menjadi Full-stack Applicati
 - **Text** is used for primary content and headings.
 - **Text Muted** is used for secondary information and supporting content.
 - **Border** should remain subtle and should not overpower the content.
+
+### Schedule Card Accent Colors
+
+| Token | Color | Hex | Usage |
+|---|---|---|---|
+| Accent 1 | Coral Red | `#E85D68` | Schedule card left border (random/user-selected) |
+| Accent 2 | Vibrant Orange | `#F07845` | Schedule card left border (random/user-selected) |
+| Accent 3 | Mustard Yellow | `#E7C23B` | Schedule card left border (random/user-selected) |
+| Accent 4 | Emerald Green | `#4CAF72` | Schedule card left border (random/user-selected) |
+| Accent 5 | Cyan Blue | `#35B9C4` | Schedule card left border (random/user-selected) |
+| Accent 6 | Royal Blue | `#4D83D1` | Schedule card left border (random/user-selected) |
+| Accent 7 | Deep Purple | `#8666D5` | Schedule card left border (random/user-selected) |
+| Accent 8 | Hot Pink | `#E7659A` | Schedule card left border (random/user-selected) |
+
+### Color Usage Guidelines
+
+- **Schedule Accents** are applied dynamically (randomly or user-selected) to card borders to provide visual variety without relying on hardcoded category mappings.

@@ -3,9 +3,11 @@
         "schedule" : {
             "date" : "",
             "time" : "", 
-            "class" : ""
+            "class" : "", 
+            "color" : ""
         }, 
         "task" : {
+            "nametask" : "",
             "desc" : "",
             "deadline" : "",
             "progress" : ""
@@ -15,72 +17,78 @@
         "schedule" : {
             "date" : "",
             "time" : "", 
-            "class" : ""
+            "class" : "", 
+            "color" : ""
         }, 
         "task" : {
+            "nametask" : "",
             "desc" : "",
             "deadline" : "",
             "progress" : ""
-        }
-    },
+        }    },
     "matkul3" : {
         "schedule" : {
             "date" : "",
             "time" : "", 
-            "class" : ""
+            "class" : "", 
+            "color" : ""
         }, 
         "task" : {
+            "nametask" : "",
             "desc" : "",
             "deadline" : "",
             "progress" : ""
-        }
-    },
+        }    },
     "matkul4" : {
         "schedule" : {
             "date" : "",
             "time" : "", 
-            "class" : ""
+            "class" : "", 
+            "color" : ""
         }, 
         "task" : {
+            "nametask" : "",
             "desc" : "",
             "deadline" : "",
             "progress" : ""
-        }
-    }, 
+        }    }, 
     "matkul5" : {
         "schedule" : {
             "date" : "",
             "time" : "", 
-            "class" : ""
+            "class" : "", 
+            "color" : ""
         }, 
         "task" : {
+            "nametask" : "",
             "desc" : "",
             "deadline" : "",
             "progress" : ""
-        }
-    }, 
+        }    }, 
     "matkul6" : {
         "schedule" : {
             "date" : "",
             "time" : "", 
-            "class" : ""
+            "class" : "", 
+            "color" : ""
         }, 
         "task" : {
+            "nametask" : "",
             "desc" : "",
             "deadline" : "",
             "progress" : ""
-        }
-    }, 
+        }    }, 
     "matkul7" : {
         "schedule" : {
             "date" : "",
             "time" : "", 
-            "class" : ""
+            "class" : "", 
+            "color" : ""
         }, 
         "task" : {
+            "nametask" : "",
             "desc" : "",
             "deadline" : "",
             "progress" : ""
-        }
-    }
+        }    }
 }
