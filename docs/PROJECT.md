@@ -2,11 +2,11 @@
 
 ## 1. Project Overview
 
-**Nestly** adalah web application untuk membantu mahasiswa mengelola aktivitas perkuliahan dan tugas dalam satu dashboard.
+**Nestly** adalah web application untuk membantu mahasiswa mengelola aktivitas perkuliahan, tugas, dan keuangan pribadi dalam satu dashboard.
 
-Project ini dirancang untuk membantu pengguna memantau tugas, deadline, progress, jadwal, serta aktivitas belajar secara lebih terorganisir. 
+Project ini dirancang untuk membantu pengguna memantau tugas, deadline, progress, jadwal kuliah, serta kondisi keuangan bulanan secara lebih terorganisir.
 
-Pengembangan project dilakukan secara bertahap. Versi awal berfokus pada **Frontend**, menggunakan data lokal melalui `localStorage`. Pada tahap berikutnya, project dapat dikembangkan menjadi aplikasi full-stack dengan **Backend dan Database** sehingga dapat mendukung akun pengguna dan sinkronisasi data antar perangkat.
+Nestly dibangun sebagai **full stack application** sejak awal pengembangan, menggunakan **Laravel** (Backend & Frontend melalui Blade, Tailwind CSS, dan Livewire) dengan **MySQL** sebagai database. Aplikasi dijalankan secara lokal menggunakan **Laragon** sebagai development server, dengan **HeidiSQL** untuk pengelolaan database.
 
 ---
 
@@ -16,9 +16,10 @@ Tujuan utama project:
 
 * Membantu mahasiswa mengorganisir tugas dan aktivitas kuliah.
 * Memudahkan pengguna memantau progress setiap tugas.
-* Menampilkan informasi akademik dalam satu dashboard.
+* Membantu mahasiswa mengontrol keuangan pribadi agar tidak boros.
+* Menampilkan informasi akademik dan finansial dalam satu dashboard.
 * Membuat pengalaman pengelolaan tugas yang sederhana dan mudah digunakan.
-* Menjadi project yang dapat dikembangkan secara bertahap dari Frontend menjadi Full-stack Application.
+* Menjadi project pembelajaran full stack development menggunakan Laravel & Livewire.
 
 ---
 
@@ -31,9 +32,9 @@ Target utama:
 * Circle atau kelompok kecil mahasiswa.
 * Kelas yang ingin menggunakan dashboard bersama.
 
-Versi awal dapat digunakan secara individual menggunakan `localStorage`.
+Versi awal digunakan secara individual (single-user, data tersimpan di database lokal).
 
-Pada versi berikutnya, sistem dapat dikembangkan agar setiap pengguna memiliki akun dan data masing-masing menggunakan Backend dan Database.
+Pada versi berikutnya, sistem dapat dikembangkan agar mendukung multi-user dengan authentication, sehingga setiap pengguna memiliki akun dan datanya masing-masing.
 
 ---
 
@@ -74,7 +75,7 @@ Progress: 70%
 ██████████████░░░░░░
 ```
 
-Progress dapat diperbarui oleh pengguna dan disimpan ke penyimpanan lokal pada versi Frontend.
+Progress dapat diperbarui oleh pengguna secara real-time menggunakan Livewire, dan disimpan langsung ke database.
 
 ---
 
@@ -90,7 +91,7 @@ Informasi yang dapat ditampilkan:
 * Tugas yang telah selesai.
 * Progress keseluruhan.
 * Deadline terdekat.
-* Aktivitas belajar.
+* Ringkasan keuangan bulan berjalan.
 
 Contoh konsep:
 
@@ -142,29 +143,32 @@ Tujuannya agar pengguna dapat mengetahui tugas mana yang perlu diprioritaskan ha
 
 ---
 
-### 4.6 Pomodoro Timer
+### 4.6 Finance Tracker
 
-Dashboard menyediakan timer belajar menggunakan metode Pomodoro dengan dua mode penggunaan.
+Dashboard menyediakan fitur pencatatan keuangan pribadi mahasiswa untuk membantu mengontrol pengeluaran bulanan.
 
-#### Mode 1 — Scheduled Pomodoro
+Fitur:
 
-Pengguna menentukan total durasi belajar yang diinginkan.
+* Mencatat pemasukan (contoh: uang saku, kiriman orang tua, penghasilan sampingan).
+* Mencatat pengeluaran dengan kategori (contoh: makan, transport, jajan, kebutuhan kuliah, lainnya).
+* Menentukan budget bulanan.
+* Melihat ringkasan sisa saldo secara real-time.
+* Indikator visual ketika pengeluaran mendekati atau melebihi budget yang ditentukan.
 
-Sistem kemudian secara otomatis membagi durasi tersebut menjadi beberapa Work Session dan Break Session berdasarkan metode Pomodoro.
-
-Contoh:
+Contoh konsep:
 
 ```text
-Total Study Time: 2 Hours
+Monthly Budget: Rp1.500.000
+Spent: Rp1.100.000
 
-25m Work
-5m Break
-25m Work
-5m Break
-25m Work
-5m Break
-25m Work
+██████████████░░░░░░ 73%
+
+Remaining: Rp400.000
 ```
+
+Update saldo dan indikator budget dilakukan secara real-time menggunakan Livewire, tanpa perlu reload halaman.
+
+---
 
 ### 4.7 Search, Filter & Sorting
 
@@ -193,72 +197,46 @@ Website mendukung:
 * Light mode.
 * Dark mode.
 
-Preferensi theme dapat disimpan secara lokal sehingga pilihan pengguna tetap digunakan ketika website dibuka kembali.
+Preferensi theme dapat disimpan sehingga pilihan pengguna tetap digunakan ketika website dibuka kembali.
 
 ---
 
 ## 5. Data Storage
 
-### Version 1 — Frontend Only
-
-Versi awal menggunakan:
+Nestly menggunakan arsitektur full stack sejak awal pengembangan:
 
 ```text
-Frontend
+Frontend (Blade + Tailwind CSS + Livewire)
    ↓
-JavaScript
+Backend (Laravel)
    ↓
-localStorage
+Database (MySQL, dikelola via Laragon & HeidiSQL)
 ```
 
-Data yang disimpan secara lokal dapat meliputi:
+Data yang disimpan ke database meliputi:
 
 * Task.
 * Progress.
 * Deadline.
 * Status.
 * Schedule.
+* Data keuangan (income, expense, budget).
 * Theme preference.
 * Pengaturan pengguna.
 
-Data akan tetap tersedia setelah browser atau website ditutup selama data pada browser tidak dihapus.
-
-### Future Version — Full Stack
-
-Pada tahap pengembangan berikutnya:
-
-```text
-Frontend
-   ↓
-  API
-   ↓
-Backend
-   ↓
-Database
-```
-
-Backend dan Database akan digunakan untuk:
-
-* Authentication.
-* User management.
-* Penyimpanan data terpusat.
-* Data per pengguna.
-* Sinkronisasi antar perangkat.
-* Pengelolaan data untuk banyak pengguna.
+Karena data tersimpan di database (bukan `localStorage`), data lebih terstruktur, dapat direlasikan antar tabel (contoh: Task terhubung ke Mata Kuliah), dan siap dikembangkan menjadi multi-user di tahap berikutnya.
 
 ---
 
 ## 6. User Account
 
-### Version 1
+### Versi Saat Ini
 
-Versi awal tidak menggunakan authentication sungguhan.
-
-Data pengguna disimpan secara lokal pada browser.
+Aplikasi berjalan sebagai single-user, tanpa sistem authentication penuh. Seluruh data disimpan di database lokal.
 
 ### Future Version
 
-Sistem dapat dikembangkan menjadi multi-user.
+Sistem dapat dikembangkan menjadi multi-user dengan authentication (login/register).
 
 Contoh:
 
@@ -267,6 +245,7 @@ User
 ├── Profile
 ├── Tasks
 ├── Schedule
+├── Finance
 └── Progress
 ```
 
@@ -284,93 +263,64 @@ User B
 └── Mobile Development → 90%
 ```
 
-Data tersebut nantinya disimpan pada Database melalui Backend.
-
 ---
 
 ## 7. Project Development Strategy
 
-Project dikembangkan secara bertahap.
+Project dikembangkan secara bertahap, dengan fondasi full stack yang sudah dibangun sejak Phase 1.
 
-### Phase 1 — Frontend
-
-Fokus:
-
-* UI/UX.
-* Responsive design.
-* Dashboard.
-* Task management.
-* Progress tracking.
-* Schedule.
-* Pomodoro.
-* Search & filter.
-* Local storage.
-
-### Phase 2 — Backend
+### Phase 1 — Core Full Stack Build
 
 Fokus:
 
-* Backend API.
-* Authentication.
-* User management.
-* Database.
-* CRUD melalui API.
-* Data validation.
+* Desain struktur database (migration & relasi antar tabel).
+* Task management (CRUD).
+* Schedule management (CRUD).
+* Finance Tracker (CRUD + kalkulasi budget).
+* Dashboard ringkasan.
+* Integrasi Livewire untuk interaktivitas real-time.
+* UI/UX dengan Tailwind CSS, responsive design.
 
-### Phase 3 — Full Stack
+### Phase 2 — Refinement & UX Polish
 
-Frontend dihubungkan dengan Backend dan Database.
+Fokus:
 
-Target:
+* Search, filter & sorting.
+* Deadline urgency indicator.
+* Light/Dark mode.
+* Perbaikan validasi data & UX secara keseluruhan.
 
-```text
-User
-  ↓
-Frontend
-  ↓
-Backend API
-  ↓
-Database
-```
+### Phase 3 — Enhancement (Future)
 
-Dengan demikian, data pengguna dapat tersimpan secara terpusat dan dapat diakses dari berbagai perangkat.
+Fokus:
+
+* User authentication & multi-user support.
+* Role management.
+* Notifications.
+* Advanced analytics/laporan keuangan & akademik.
+* Kemungkinan deployment ke hosting/cloud.
 
 ---
 
 ## 8. Technology Stack
 
-### Current Development
+| Layer | Technology |
+|---|---|
+| Frontend & Backend | Laravel (Blade + Livewire) |
+| Styling | Tailwind CSS (dipakai di dalam file Blade) |
+| Database | MySQL |
+| Local Development Server | Laragon |
+| Database Management Tool | HeidiSQL |
 
-Frontend:
-
-- React
-- Tailwind CSS
-
-Data Storage:
-
-- localStorage
-
-### Future Development
-
-Backend:
-
-- [To be decided]
-
-Database:
-
-- [To be decided]
-
-Backend, database, dan teknologi tambahan akan ditentukan berdasarkan kebutuhan project dan hasil diskusi sebelum masuk ke tahap pengembangan lebih lanjut (Phase 2 & 3).
+Tidak menggunakan framework/library JavaScript terpisah — seluruh interaktivitas (real-time update, filter, progress bar dinamis, indikator budget) ditangani oleh **Livewire**.
 
 ---
 
 ## 9. Deployment
 
-Versi Frontend dapat di-host menggunakan layanan hosting gratis yang mendukung static websites.
+Untuk saat ini, aplikasi dijalankan secara lokal melalui **Laragon** sebagai bagian dari project pembelajaran/portofolio pribadi.
 
-Karena versi awal tidak membutuhkan server-side processing, website dapat berjalan sebagai static web application.
-
-Pada tahap Full Stack, deployment akan disesuaikan dengan kebutuhan Backend dan Database.
+Rencana deployment ke hosting/cloud dapat dipertimbangkan pada tahap pengembangan berikutnya (Phase 3), menyesuaikan kebutuhan (contoh: shared hosting PHP atau cloud VPS) apabila project ingin diakses publik atau multi-user.
 
 ---
 
@@ -383,35 +333,32 @@ Pada tahap Full Stack, deployment akan disesuaikan dengan kebutuhan Backend dan 
 * Progress tracking.
 * Deadline management.
 * Schedule.
-* Pomodoro timer.
+* Finance tracker.
 * Search, filter & sorting.
 * Theme preference.
-* Local data persistence.
 * Responsive interface.
 
 ### Future Scope
 
 * User authentication.
 * Multi-user support.
-* Backend API.
-* Database.
 * Cross-device synchronization.
 * User profile.
 * Role management.
 * Notifications.
-* Advanced analytics.
+* Advanced analytics (akademik & keuangan).
 
 ---
 
 ## 11. Expected Result
 
-Project diharapkan menjadi web application yang dapat membantu mahasiswa mengelola tugas dan aktivitas akademik dengan lebih terorganisir.
+Project diharapkan menjadi web application full stack yang dapat membantu mahasiswa mengelola tugas, jadwal kuliah, dan keuangan pribadi dengan lebih terorganisir.
 
-Versi awal akan berfungsi sebagai Frontend application yang dapat digunakan secara lokal dan di-host sebagai static website.
+Aplikasi dibangun di atas fondasi Laravel + Livewire yang solid sejak awal, sehingga pengembangan fitur lanjutan (authentication, multi-user, notifikasi, dsb.) dapat dilakukan tanpa perlu membangun ulang arsitektur dari awal.
 
-Project kemudian dapat dikembangkan secara bertahap menjadi Full-stack Application tanpa harus membangun ulang seluruh Frontend dari awal.
+---
 
-## 12. Color System 
+## 12. Color System
 
 ### Light Mode
 
