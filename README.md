@@ -39,10 +39,6 @@ Currently in **Phase 1 (Frontend Development)**, Nestly runs entirely in the bro
   - 🟠 **Orange** — High priority needed
   - 🔴 **Red** — Overdue / Critical
 
-### 🍅 Pomodoro Timer
-- **Scheduled Mode:** Input total study time → auto-generates optimized Work/Break sessions (25m/5m cycles)
-- Clean, distraction-free focus interface
-
 ### 🗓️ Schedule Management
 - Log class schedules (Subject, Day, Time, Room, Lecturer)
 - Quick reference for weekly academic planning
@@ -62,10 +58,10 @@ Currently in **Phase 1 (Frontend Development)**, Nestly runs entirely in the bro
 
 | Component | Technology |
 |-----------|------------|
-| **Frontend** | React |
+| **Frontend & Backend** | Laravel |
 | **Styling** | Tailwind CSS |
 | **Data Storage** | `localStorage` |
-| **State Management** | React State/Hooks + Local Storage API |
+| **State Management** | Local Storage API |
 | **Deployment** | Static Hosting Netlify |
 
 ---
