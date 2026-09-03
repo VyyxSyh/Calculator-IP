@@ -82,12 +82,12 @@ Checklist pengembangan Nestly, dikelompokkan per fitur sesuai PRD.md. Centang it
 - [ ] Sorting: progress tertinggi / terendah
 - [ ] Sorting: tugas terbaru
 
-## 🎨 Theme
-- [ ] Implementasi Light mode (Tailwind color tokens sesuai PROJECT.md)
-- [ ] Implementasi Dark mode (Tailwind `dark:` variant)
-- [ ] Toggle switch tema
-- [ ] Simpan preferensi tema (cookie/session, atau tabel `user_settings` jika ingin persist ke database)
-- [ ] Terapkan tema otomatis saat aplikasi dibuka kembali
+## 🎨 Theme (Tema Pink — default)
+- [ ] Implementasi Light mode tema Pink (Tailwind color tokens sesuai PROJECT.md)
+- [ ] Implementasi Dark mode tema Pink (Tailwind `dark:` variant)
+- [ ] Toggle switch Light/Dark mode
+- [ ] Simpan preferensi Light/Dark mode (cookie/session, atau tabel `user_settings` jika ingin persist ke database)
+- [ ] Terapkan preferensi otomatis saat aplikasi dibuka kembali
 
 ## 💾 Data Persistence
 - [ ] Pastikan seluruh migration sudah mencerminkan relasi antar tabel dengan benar
@@ -123,6 +123,9 @@ Checklist pengembangan Nestly, dikelompokkan per fitur sesuai PRD.md. Centang it
 - [ ] Penyempurnaan UX search/filter/sorting
 - [ ] Penyempurnaan indikator urgensi & aksesibilitas warna
 - [ ] Optimasi query & performa Livewire component
+- [ ] Buat tema warna **Blue** (Light Mode + Dark Mode) mengikuti struktur 12-token yang sama
+- [ ] Buat tema warna **Monochrome** (Light Mode + Dark Mode) mengikuti struktur 12-token yang sama
+- [ ] Buat mekanisme pilih & simpan preferensi tema warna (terpisah dari preferensi Light/Dark mode)
 
 **Phase 3 — Enhancement**
 - [ ] Implementasi User Authentication (Laravel Breeze/Fortify)

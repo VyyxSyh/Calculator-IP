@@ -288,6 +288,7 @@ Fokus:
 * Search, filter & sorting.
 * Deadline urgency indicator.
 * Light/Dark mode.
+* Multi color theme — tambahan tema **Blue** dan **Monochrome** (masing-masing Light Mode + Dark Mode), selain tema Pink default dari Phase 1.
 * Perbaikan validasi data & UX secara keseluruhan.
 
 ### Phase 3 — Enhancement (Future)
@@ -360,31 +361,41 @@ Aplikasi dibangun di atas fondasi Laravel + Livewire yang solid sejak awal, sehi
 
 ## 12. Color System
 
+> Tema warna utama Nestly adalah **Pink** (lihat token di bawah). Token warna mengikuti struktur 12-token (termasuk semantic colors untuk status task, deadline urgency, dan finance tracker).
+
 ### Light Mode
 
-| Token | Color | Hex | Usage |
-|---|---|---|---|
-| Primary | Mint Teal | `#2A9D8F` | Primary buttons, active states, links, main accents |
-| Secondary | Soft Teal | `#52B7A9` | Secondary actions, supporting accents |
-| Tertiary | Pale Mint | `#D8EFEB` | Subtle backgrounds, badges, highlights |
-| Background | Warm Off-White | `#F5F4F0` | Main page background |
-| Surface | White | `#FFFFFF` | Cards, navbar, panels, modals |
-| Text | Charcoal | `#202522` | Headings and primary text |
-| Text Muted | Muted Gray-Green | `#68716D` | Descriptions, metadata, secondary text |
-| Border | Soft Gray-Green | `#D9DEDA` | Borders, dividers, input outlines |
+| Token | Hex | Usage |
+|---|---|---|
+| Primary | `#FF4D8D` | Primary buttons, active nav, links, focus rings |
+| Secondary | `#FF9DBB` | Secondary buttons, less prominent actions |
+| Tertiary | `#FFD6E5` | Subtle backgrounds, badges, chip highlights, hover fills |
+| Background | `#FFF7FA` | Main page background |
+| Surface | `#FFFFFF` | Cards, navbar, panels, modals |
+| Text | `#16141A` | Headings, primary content |
+| Text Muted | `#6B6470` | Descriptions, metadata, timestamps |
+| Border | `#FFE1EA` | Dividers, input outlines, card borders |
+| Success | `#22C55E` | Completed tasks, income entries, "on track" budget |
+| Danger | `#EF4444` | Overdue tasks, expense entries, over-budget alerts |
+| Warning | `#F59E0B` | Approaching deadline, nearing budget limit |
+| Info | `#3B82F6` | In-progress states, neutral notifications |
 
 ### Dark Mode
 
-| Token | Color | Hex | Usage |
-|---|---|---|---|
-| Primary | Bright Mint | `#5FD1C2` | Primary buttons, active states, links, main accents |
-| Secondary | Deep Teal | `#3BAFA2` | Secondary actions, supporting accents |
-| Tertiary | Dark Teal | `#163D39` | Subtle backgrounds, badges, highlights |
-| Background | Deep Charcoal | `#0D1211` | Main page background |
-| Surface | Dark Charcoal | `#151B19` | Cards, navbar, panels, modals |
-| Text | Soft White | `#EAF3F0` | Headings and primary text |
-| Text Muted | Muted Gray | `#9AA9A4` | Descriptions, metadata, secondary text |
-| Border | Dark Gray-Teal | `#293531` | Borders, dividers, input outlines |
+| Token | Hex | Usage |
+|---|---|---|
+| Primary | `#E879F9` | Primary buttons, active nav, links, focus rings |
+| Secondary | `#F0ABFC` | Secondary buttons, less prominent actions |
+| Tertiary | `#A855F7` | Subtle backgrounds, badges, chip highlights, hover fills |
+| Background | `#1B0F1F` | Main page background |
+| Surface | `#2B1830` | Cards, navbar, panels, modals |
+| Text | `#F8F0FA` | Headings, primary content |
+| Text Muted | `#BFA6C7` | Descriptions, metadata, timestamps |
+| Border | `#4A2F52` | Dividers, input outlines, card borders |
+| Success | `#4ADE80` | Completed tasks, income entries, "on track" budget |
+| Danger | `#F87171` | Overdue tasks, expense entries, over-budget alerts |
+| Warning | `#FBBF24` | Approaching deadline, nearing budget limit |
+| Info | `#60A5FA` | In-progress states, neutral notifications |
 
 ### Color Usage Guidelines
 
@@ -396,6 +407,17 @@ Aplikasi dibangun di atas fondasi Laravel + Livewire yang solid sejak awal, sehi
 - **Text** is used for primary content and headings.
 - **Text Muted** is used for secondary information and supporting content.
 - **Border** should remain subtle and should not overpower the content.
+- **Success / Danger / Warning / Info** are reserved for semantic states (task status, deadline urgency, finance in/out, budget alerts) — should not be reused for generic brand/decorative purposes so their meaning stays consistent across the app.
+
+### Future Scope — Multi Color Theme (Phase 2)
+
+> Tidak dikerjakan di Phase 1. Direncanakan masuk **Phase 2 (Refinement & UX Polish)**.
+
+Selain tema Pink (default, sudah termasuk Light Mode & Dark Mode di Phase 1), akan ditambahkan pilihan tema warna:
+- **Blue Theme** (Light Mode + Dark Mode)
+- **Monochrome Theme** — hitam, putih, abu-abu (Light Mode + Dark Mode)
+
+Setiap tema tambahan mengikuti struktur 12-token yang sama seperti tema Pink. Implementasi ini membutuhkan mekanisme penyimpanan preferensi tema per pengguna (terpisah dari preferensi Light/Dark mode).
 
 ### Schedule Card Accent Colors
 

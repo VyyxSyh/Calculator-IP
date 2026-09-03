@@ -157,6 +157,7 @@ Mahasiswa membutuhkan satu dashboard terpusat yang dapat menampilkan tugas, prog
 - Penyempurnaan search/filter/sorting.
 - Penyempurnaan indikator urgensi deadline.
 - Penyempurnaan dark/light mode & aksesibilitas.
+- Multi color theme — tambahan tema Blue dan Monochrome (masing-masing Light Mode + Dark Mode), selain tema Pink default dari Phase 1.
 
 **Phase 3 — Enhancement:**
 - User authentication (login/register).
@@ -230,7 +231,7 @@ Referensi warna lengkap (hex code untuk Light & Dark mode, serta accent color un
 - **Data yang disimpan di database (MySQL):** Task, Progress, Deadline, Status, Schedule, Data keuangan (income, expense, budget), Theme preference, Pengaturan pengguna.
 - **Roadmap Pengembangan:**
   - Phase 1 (🟢 Current) — Core Full Stack Build (Task, Schedule, Finance Tracker, Dashboard, Livewire integration).
-  - Phase 2 (🟡 Future) — Refinement & UX Polish (search/filter/sorting, urgency indicator, dark/light mode).
+  - Phase 2 (🟡 Future) — Refinement & UX Polish (search/filter/sorting, urgency indicator, dark/light mode, multi color theme Blue & Monochrome).
   - Phase 3 (🔵 Future) — Enhancement (Authentication, multi-user, notifications, advanced analytics, kemungkinan deployment ke hosting/cloud).
 - **Deployment (Saat Ini):** Local development via Laragon, database dikelola via HeidiSQL — digunakan sebagai project pembelajaran/portofolio pribadi.
 - **Tech Stack:** Laravel (Backend & Frontend melalui Blade + Livewire), Tailwind CSS untuk styling, MySQL sebagai database. Tidak menggunakan JavaScript framework terpisah — seluruh interaktivitas ditangani oleh Livewire.
