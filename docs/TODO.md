@@ -7,18 +7,18 @@ Checklist pengembangan Nestly, dikelompokkan per fitur sesuai PRD.md. Centang it
 ---
 
 ## 🏗️ Setup & Foundation
-- [ ] Install Laravel project baru
-- [ ] Install & konfigurasi Livewire
-- [ ] Install & konfigurasi Tailwind CSS
-- [ ] Setup database MySQL via Laragon
-- [ ] Buat koneksi database di `.env` & test koneksi
-- [ ] Setup HeidiSQL untuk akses & inspeksi database
-- [ ] Rancang skema database awal (tabel: tasks, mata_kuliah/subjects, schedules, finance_records, budgets)
-- [ ] Setup struktur folder project (Livewire components, views, routes)
-- [ ] Setup Git repository & `.gitignore`
+- [x] Install Laravel project baru
+- [x] Install & konfigurasi Livewire
+- [x] Install & konfigurasi Tailwind CSS
+- [x] Setup database MySQL via Laragon
+- [x] Buat koneksi database di `.env` & test koneksi
+- [x] Setup HeidiSQL untuk akses & inspeksi database
+- [x] Rancang skema database awal (tabel: tasks, mata_kuliah/subjects, schedules, finance_records, budgets)
+- [x] Setup struktur folder project (Livewire components, views, routes)
+- [x] Setup Git repository & `.gitignore`
 
 ## ✅ Task Management
-- [ ] Migration tabel `tasks` (judul, deskripsi, mata_kuliah_id, deadline, status, progress, priority)
+- [x] Migration tabel `tasks` (judul, deskripsi, mata_kuliah_id, deadline, status, progress, priority)
 - [ ] Model `Task` + relasi ke `Subject`/Mata Kuliah
 - [ ] Livewire component: form tambah tugas
 - [ ] Livewire component: daftar tugas (Task List)

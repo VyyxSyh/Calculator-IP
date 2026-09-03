@@ -1,9 +1,9 @@
 # Nestly — Student Task & Study Dashboard
 
-[![Status](https://img.shields.io/badge/Status-In%20Development-blue?style=for-the-badge)](#)
-[![Stack](https://img.shields.io/badge/Stack-Laravel%20%2B%20Livewire-red?style=for-the-badge)](#)
-[![Storage](https://img.shields.io/badge/Data-LocalStorage-orange?style=for-the-badge)](#)
-[![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
+<a href=""><img src="https://img.shields.io/badge/Status-In%20Development-blue" alt="License"></a>
+<a href=""><img src="https://img.shields.io/badge/Stack-Laravel%20%2B%20Livewire-red" alt="Stack"></a>
+<a href=""><img src="https://img.shields.io/badge/Data-LocalStorage-orange" alt="Data"></a>
+
 
 > 🎓 **All-in-one academic dashboard for students.** Track tasks, monitor progress, manage class schedules, and keep your student finances in check — all in one place.
 
