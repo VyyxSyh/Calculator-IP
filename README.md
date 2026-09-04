@@ -1,117 +1,53 @@
-# Nestly — Student Task & Study Dashboard
+# IP Network Toolkit
 
-<a href=""><img src="https://img.shields.io/badge/Status-In%20Development-blue" alt="Status"></a>
-<a href=""><img src="https://img.shields.io/badge/Stack-Laravel%20%2B%20Livewire-red" alt="Stack"></a>
-<a href=""><img src="https://img.shields.io/badge/Data-MySQL-4479A1" alt="Data"></a>
-<a href=""><img src="https://img.shields.io/badge/Theme-Pink-FF4D8D" alt="Theme"></a>
+Kumpulan tools jaringan IPv4 (Subnet Calculator, VLSM/Subnet Splitter, CIDR
+Summarization, Ping Simulator, Traceroute Simulator) dalam satu halaman.
+Dibangun dengan React + Vite + Tailwind CSS.
 
-> 🎓 **All-in-one academic dashboard for students.** Track tasks, monitor progress, manage class schedules, and keep your student finances in check — all in one place.
+## Menjalankan
 
-**Live Demo :** Coming Soon
+```bash
+npm install
+npm run dev
+```
 
-**Current Status :** Full Stack Development (Laravel + Livewire) — Phase 1 in progress
+Buka URL yang ditampilkan (biasanya `http://localhost:5173`).
 
----
+Build produksi:
 
-## 🚀 About Nestly
+```bash
+npm run build
+npm run preview
+```
 
-Nestly is a web application designed to help students manage their academic life without the clutter. From tracking assignment deadlines to keeping monthly finances under control, Nestly turns a chaotic student life into a clear, actionable dashboard.
+## Struktur proyek
 
-Nestly is built as a **full stack application** using **Laravel** for both backend and frontend (via Blade + Livewire), with data stored in a **MySQL database**. The app runs locally using **Laragon** as the local development server, and the database is managed through **HeidiSQL**.
+```
+src/
+  utils/ipUtils.js        # semua logic bitwise: parsing, subnet math,
+                           # alokasi VLSM, agregasi CIDR, helper dummy data
+  components/
+    Sidebar.jsx            # navigasi tab (sidebar desktop / tab bar mobile)
+    BitVisualizer.jsx       # visual bit network vs host per oktet
+    SubnetCalculator.jsx    # tool 1 (juga menyimpan primitive UI bersama:
+                             # ToolHeader, Field, Row, inputClass)
+    VlsmSplitter.jsx        # tool 2
+    CidrSummarization.jsx   # tool 3
+    PingSimulator.jsx       # tool 4 (terminal style, simulasi client-side)
+    TracerouteSimulator.jsx # tool 5 (terminal style, simulasi client-side)
+  App.jsx                  # state tab aktif + layout
+  main.jsx / index.css     # entry point & base styles
+```
 
-> ℹ️ The current version runs as a **single-user** application (no full authentication system yet), but all data is already persisted in MySQL — not in the browser (`localStorage`).
+## Catatan penting
 
----
-
-## ✨ Core Features
-
-### 📝 Task Management
-- Create, edit, delete, and categorize academic tasks
-- Track status: `Not Started` → `In Progress` → `Completed`
-- Set deadlines, priority levels, and progress percentage (0–100%)
-
-### 📊 Progress & Dashboard
-- Visual progress bars for each task
-- Dashboard overview: total tasks, status breakdown, overall progress, nearest deadlines, monthly finance summary
-- Real-time statistics powered by Livewire — no full page reload
-
-### ⏰ Deadline Tracking
-- Smart urgency indicators, updated automatically based on the current date:
-  - 🟢 **Green** — Safe & on track
-  - 🟡 **Yellow** — Approaching deadline
-  - 🟠 **Orange** — High priority, needs attention soon
-  - 🔴 **Red** — Overdue / Critical
-
-### 🗓️ Schedule Management
-- Log class schedules (Subject, Day, Time, Room, Lecturer)
-- Quick reference for weekly academic planning
-- Accent color per schedule card for visual variety
-
-### 💰 Finance Tracker
-- Record income & expenses with categories (food, transport, allowance, academic needs, etc.)
-- Set monthly budget and track remaining balance in real-time
-- Visual indicator when spending is approaching or exceeding budget
-
-### 🔍 Search, Filter & Sort
-- Filter by status, deadline, subject, or progress
-- Sort by nearest deadline, highest/lowest progress, or creation date
-
-### 🎨 Theme & UX
-- **Pink theme** (default) with Light / Dark mode toggle — preference saved and applied automatically
-- Fully responsive design (Mobile, Tablet, Desktop)
-
----
-
-## 🛠️ Tech Stack & Architecture
-
-| Component | Technology |
-|-----------|------------|
-| **Frontend & Backend** | Laravel (Blade + Livewire) |
-| **Styling** | Tailwind CSS |
-| **Database** | MySQL |
-| **Local Dev Server** | Laragon |
-| **Database Management Tool** | HeidiSQL |
-| **Deployment** | Localhost (personal project / portfolio) |
-
-> ℹ️ No separate JavaScript framework is used — all dynamic/interactive features (real-time updates, filters, progress indicators) are handled through **Livewire**.
-
----
-
-## 🎨 Color System
-
-Nestly's default theme is **Pink**, with dedicated Light Mode and Dark Mode token sets (12 tokens each: Primary, Secondary, Tertiary, Background, Surface, Text, Text Muted, Border, Success, Danger, Warning, Info).
-
-Full color tokens are documented in [`PROJECT.md`](./PROJECT.md#12-color-system).
-
----
-
-## 🗺️ Development Roadmap
-
-| Phase | Focus | Key Deliverables |
-|-------|-------|------------------|
-| **Phase 1** 🟢 *(Current)* | **Core Full Stack Build** | Database design & migrations, Task CRUD, Schedule CRUD, Finance Tracker (income/expense/budget), Dashboard summary, deadline urgency indicators, Pink theme (Light/Dark mode), responsive Tailwind UI, Livewire integration |
-| **Phase 2** 🟡 | **Refinement & UX Polish** | Search/filter/sorting refinement, multi color theme (**Blue** & **Monochrome**, each with Light + Dark mode) in addition to the default Pink theme, overall data validation & UX improvements |
-| **Phase 3** 🔵 | **Enhancements (Future)** | User authentication & multi-user support, role management, notifications, advanced academic/financial analytics, potential cloud/hosting deployment |
-
----
-
-## 🤝 Contributing & Feedback
-
-Nestly is a personal academic project aimed at solving real student pain points. Feedback, feature requests, and collaboration are highly welcome!
-- 🐛 Found a bug? Open an [Issue](#)
-- 💡 Have an idea? Start a [Discussion](#)
-- 🛠️ Want to contribute? Check the [Roadmap](#️-development-roadmap)
-
----
-
-## 📄 License
-
-Distributed under the **MIT License**. See `LICENSE` for details.
-
-> ⚠️ **Disclaimer:** Nestly is currently in active development. Features and architecture may evolve as the project progresses.
-
----
-
-<div align="center">
-  <sub>Built with ❤️ by <strong>Syukron Raffiansyah (Vyy)</strong> • 2026</sub>
-</div>
+- **Ping & Traceroute murni simulasi.** Browser tidak bisa mengirim paket
+  ICMP langsung, jadi kedua tool ini menghasilkan IP, hostname, dan waktu
+  respons acak (dengan pola yang realistis) — bukan hasil pengukuran
+  jaringan sungguhan.
+- Semua perhitungan subnetting (network/broadcast address, VLSM, CIDR
+  summarization) memakai operasi bitwise murni di `src/utils/ipUtils.js`,
+  tidak ada nilai yang di-hardcode per kelas/prefix.
+- Palet warna & tipografi didefinisikan sebagai token di `tailwind.config.js`
+  (warna `paper/panel/ink/muted/line/signal/term`, font `IBM Plex Sans` untuk
+  teks dan `IBM Plex Mono` untuk semua data IP/biner).
