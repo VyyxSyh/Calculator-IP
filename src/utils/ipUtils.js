@@ -292,24 +292,3 @@ export function summarizeCidr(blocks) {
     maxEnd,
   }
 }
-
-// ---------------------------------------------------------------------------
-// Dummy-data helpers for Ping / Traceroute simulators (no real network I/O)
-// ---------------------------------------------------------------------------
-
-export function randomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
-
-export function randomPublicIp() {
-  // Pick octets that steer clear of reserved/private/multicast ranges,
-  // purely for a visually plausible dummy address.
-  const first = [
-    randomInt(1, 9),
-    randomInt(11, 126),
-    randomInt(128, 171),
-    randomInt(174, 191),
-    randomInt(193, 223),
-  ][randomInt(0, 4)]
-  return `${first}.${randomInt(0, 255)}.${randomInt(0, 255)}.${randomInt(1, 254)}`
-}

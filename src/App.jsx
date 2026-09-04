@@ -3,15 +3,11 @@ import Sidebar, { TOOLS } from './components/Sidebar'
 import SubnetCalculator from './components/SubnetCalculator'
 import VlsmSplitter from './components/VlsmSplitter'
 import CidrSummarization from './components/CidrSummarization'
-import PingSimulator from './components/PingSimulator'
-import TracerouteSimulator from './components/TracerouteSimulator'
 
 const PANELS = {
   subnet: SubnetCalculator,
   vlsm: VlsmSplitter,
   cidr: CidrSummarization,
-  ping: PingSimulator,
-  traceroute: TracerouteSimulator,
 }
 
 export default function App() {
