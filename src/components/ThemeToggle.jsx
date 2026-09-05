@@ -1,25 +1,26 @@
+import './theme-toggle.css'
 import { useTheme } from '../context/ThemeContext'
 
+// Structure/behavior only — visual styling is the custom day/night switch
+// provided separately (see theme-toggle.css). Checked = light mode.
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme()
-  const isDark = theme === 'dark'
 
   return (
-    <button
-      onClick={toggleTheme}
-      role="switch"
-      aria-checked={isDark}
-      aria-label="Ganti mode terang/gelap"
-      className="relative w-14 h-8 rounded-full glass flex items-center px-1 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-base"
-    >
-      <span
-        className={
-          'absolute top-1 left-1 w-6 h-6 rounded-full bg-accentSolid text-white flex items-center justify-center text-xs transition-transform duration-300 ease-smooth ' +
-          (isDark ? 'translate-x-6' : 'translate-x-0')
-        }
-      >
-        {isDark ? '🌙' : '☀️'}
+    <label className="octet-switch" aria-label="Ganti mode terang/gelap">
+      <input type="checkbox" checked={theme === 'light'} onChange={toggleTheme} />
+      <span className="octet-slider">
+        <div className="octet-star octet-star_1" />
+        <div className="octet-star octet-star_2" />
+        <div className="octet-star octet-star_3" />
+        <svg viewBox="0 0 16 16" className="octet-cloud">
+          <path
+            transform="matrix(.77976 0 0 .78395-299.99-418.63)"
+            fill="#fff"
+            d="m391.84 540.91c-.421-.329-.949-.524-1.523-.524-1.351 0-2.451 1.084-2.485 2.435-1.395.526-2.388 1.88-2.388 3.466 0 1.874 1.385 3.423 3.182 3.667v.034h12.73v-.006c1.775-.104 3.182-1.584 3.182-3.395 0-1.747-1.309-3.186-2.994-3.379.007-.106.011-.214.011-.322 0-2.707-2.271-4.901-5.072-4.901-2.073 0-3.856 1.202-4.643 2.925"
+          />
+        </svg>
       </span>
-    </button>
+    </label>
   )
 }

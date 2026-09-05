@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ThemeToggle from './ThemeToggle'
 import Hamburger from './Hamburger'
+import OctetLogo from './OctetLogo'
+import { useTheme } from '../context/ThemeContext'
 
 const TOOLS = [
   { id: 'subnet', label: 'Subnet Calculator', hint: 'IP + prefix → detail lengkap' },
@@ -14,6 +16,7 @@ const EASE = [0.22, 1, 0.36, 1]
 export default function Sidebar({ active, onSelect }) {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { theme } = useTheme()
 
   useEffect(() => {
     function onScroll() {
@@ -42,9 +45,9 @@ export default function Sidebar({ active, onSelect }) {
     <>
       {/* ---------- Desktop sidebar ---------- */}
       <nav className="hidden md:flex md:flex-col md:w-64 shrink-0 md:sticky md:top-4 md:self-start md:max-h-[calc(100vh-2rem)] md:m-4 mr-0 glass rounded-3xl p-4">
-        <div className="px-2 py-3">
-          <p className="font-mono text-xs text-accent tracking-tight">11101100.11101110</p>
-          <h1 className="font-sans text-xl font-extrabold text-ink mt-1">Octet</h1>
+        <div className="px-2 py-3 flex flex-col items-center text-center">
+          <OctetLogo className="w-10 h-10" />
+          <h1 className="font-sans text-xl font-extrabold text-ink mt-2">Octet</h1>
           <p className="text-sm text-muted mt-1">Kalkulator subnetting IPv4</p>
         </div>
 
@@ -72,7 +75,7 @@ export default function Sidebar({ active, onSelect }) {
         </ul>
 
         <div className="mt-auto pt-4 flex items-center justify-between px-2">
-          <span className="text-xs text-muted">Tampilan</span>
+          <span className="text-xs text-muted">{theme === 'light' ? 'Light mode' : 'Dark mode'}</span>
           <ThemeToggle />
         </div>
       </nav>
@@ -85,7 +88,8 @@ export default function Sidebar({ active, onSelect }) {
         }
       >
         <div className="flex items-center justify-between px-4 py-3">
-          <div>
+          <div className="flex items-center gap-2">
+            <OctetLogo className="w-7 h-7" />
             <h1 className="font-sans text-lg font-extrabold text-ink">Octet</h1>
           </div>
           <div className="flex items-center gap-2">
