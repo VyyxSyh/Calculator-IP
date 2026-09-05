@@ -1,4 +1,4 @@
-<p align="center"><a href="#" target="_blank"><img src="src/Logo.png" width="200" alt="Octet"></a></p>
+<p align="center"><a href="#" target="_blank"><img src="Logo.png" width="200" alt="Octet"></a></p>
 
 <div align="center">
 
