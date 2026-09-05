@@ -3,6 +3,6 @@
 // real logo asset when one is ready — everywhere else just imports
 // <OctetLogo /> so nothing else needs to change.
 export default function OctetLogo({ className = 'w-10 h-10' }) {
-  return <img src="/Logo.png" className={className} alt="Octet" />
+  return <img src="Logo.png" className={className} alt="Octet" />
   
 }
