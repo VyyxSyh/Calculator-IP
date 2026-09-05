@@ -1,4 +1,4 @@
-<p align="center"><a href="#" target="_blank"><img src="Logo.png" width="200" alt="Octet"></a></p>
+<p align="center"><a href="#" target="_blank"><img src="public/Logo.png" width="200" alt="Octet"></a></p>
 
 <div align="center">
 
@@ -87,8 +87,8 @@ Punya beberapa network terpisah dan ingin tahu satu CIDR gabungan yang mencakupn
 
 ```bash
 # 1. Clone repo ini
-git clone https://github.com/<username>/<repo-name>.git
-cd <repo-name>
+git clone https://github.com/VyyxSyh/Calculator-IP.git
+cd Calculator-IP
 
 # 2. Install dependencies
 npm install
@@ -118,18 +118,16 @@ Broadcast : 192.168.1.255
 Host valid: 192.168.1.1 – 192.168.1.254
 ```
 
-## 🗺️ Rencana ke Depan
-
-- [ ] Dukungan IPv6
-- [ ] Ekspor hasil perhitungan (PDF/CSV)
-- [ ] Riwayat perhitungan
-
 ---
-
+ 
 <div align="center">
+<h3> 🌐 Octet </h3>
+ 
+*"Because subnetting should be calculated by the system, not scribbled on paper."*
 
-Dibuat untuk siapa pun yang pernah bingung menghitung subnet manual di kertas 📝
 
-⭐ Kalau toolkit ini membantu, jangan lupa kasih star di repo ini!
-
+<sub>Built with ☕ and React + Tailwind CSS</sub>
+ 
+<sub>© 2026 Octet. All rights reserved.</sub>
+  
 </div>
