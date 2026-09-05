@@ -1,6 +1,8 @@
+<p align="center"><a href="#" target="_blank"><img src="src/Logo.png" width="200" alt="Octet"></a></p>
+
 <div align="center">
 
-# 🌐 Octet
+#  Octet
 
 **Kalkulator subnetting IPv4 yang lebih dari sekadar kalkulator biasa.**
 
