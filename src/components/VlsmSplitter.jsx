@@ -66,7 +66,7 @@ export default function VlsmSplitter() {
         description="Bagi satu network menjadi beberapa subnet — merata (equal split) atau sesuai kebutuhan jumlah host tiap subnet (VLSM)."
       />
 
-      <div className="bg-panel border border-line rounded p-5">
+      <div className="glass rounded-3xl p-5">
         <div className="grid sm:grid-cols-2 gap-4">
           <Field label="Network address" error={!ipCheck.valid ? ipCheck.error : null}>
             <input value={ipInput} onChange={(e) => setIpInput(e.target.value)} className={inputClass} />
@@ -85,7 +85,7 @@ export default function VlsmSplitter() {
         </div>
       </div>
 
-      <div className="flex border border-line rounded overflow-hidden w-fit">
+      <div className="flex rounded-full bg-surface/60 dark:bg-surface/40 border border-surfaceBorder/50 dark:border-surfaceBorder/10 p-1 w-fit">
         {[
           { id: 'equal', label: 'Bagi rata (jumlah subnet)' },
           { id: 'vlsm', label: 'VLSM (kebutuhan host)' },
@@ -94,10 +94,10 @@ export default function VlsmSplitter() {
             key={opt.id}
             onClick={() => setMode(opt.id)}
             className={
-              'px-4 py-2 text-sm font-medium ' +
+              'px-4 py-2 text-sm font-semibold rounded-full transition-colors duration-200 ' +
               buttonFocusClass +
               ' ' +
-              (mode === opt.id ? 'bg-signal-500 text-white' : 'bg-white text-muted hover:bg-paper')
+              (mode === opt.id ? 'bg-accentSolid text-white' : 'text-muted hover:text-ink')
             }
           >
             {opt.label}
@@ -106,7 +106,7 @@ export default function VlsmSplitter() {
       </div>
 
       {mode === 'equal' && (
-        <div className="bg-panel border border-line rounded p-5">
+        <div className="glass rounded-3xl p-5">
           <Field label="Dibagi menjadi berapa subnet?">
             <input
               value={equalCount}
@@ -119,12 +119,12 @@ export default function VlsmSplitter() {
       )}
 
       {mode === 'vlsm' && (
-        <div className="bg-panel border border-line rounded p-5 space-y-3">
+        <div className="glass rounded-3xl p-5 space-y-3">
           <div className="flex justify-between items-center">
             <h3 className="text-sm font-semibold text-ink">Kebutuhan host per subnet</h3>
             <button
               onClick={addRow}
-              className={`text-xs font-medium text-signal-600 border border-signal-500 rounded px-3 py-1.5 hover:bg-signal-50 ${buttonFocusClass}`}
+              className={`text-xs font-semibold text-accent border border-accent/40 rounded-full px-4 py-1.5 hover:bg-accentTint transition-colors ${buttonFocusClass}`}
             >
               + Tambah baris
             </button>
@@ -147,7 +147,7 @@ export default function VlsmSplitter() {
               <button
                 onClick={() => removeRow(row.id)}
                 disabled={hostRows.length <= 1}
-                className={`text-muted hover:text-red-600 disabled:opacity-30 disabled:cursor-not-allowed px-2 py-2 text-sm rounded ${buttonFocusClass}`}
+                className={`text-muted hover:text-red-500 disabled:opacity-30 disabled:cursor-not-allowed px-2 py-2 text-sm rounded-full ${buttonFocusClass}`}
                 aria-label="Hapus baris"
               >
                 ✕
@@ -158,7 +158,7 @@ export default function VlsmSplitter() {
       )}
 
       {mode === 'equal' && equalResult?.error && (
-        <p className="text-sm text-red-600">{equalResult.error}</p>
+        <p className="text-sm text-red-500">{equalResult.error}</p>
       )}
       {mode === 'equal' && equalResult?.subnets && (
         <ResultTable
@@ -169,7 +169,7 @@ export default function VlsmSplitter() {
         />
       )}
 
-      {mode === 'vlsm' && vlsmResult?.error && <p className="text-sm text-red-600">{vlsmResult.error}</p>}
+      {mode === 'vlsm' && vlsmResult?.error && <p className="text-sm text-red-500">{vlsmResult.error}</p>}
       {mode === 'vlsm' && vlsmResult?.allocations && (
         <ResultTable
           rows={vlsmResult.allocations.map((alloc, i) => ({
@@ -185,10 +185,10 @@ export default function VlsmSplitter() {
 
 function ResultTable({ rows }) {
   return (
-    <div className="bg-panel border border-line rounded overflow-x-auto">
+    <div className="glass rounded-3xl overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-line text-left">
+          <tr className="border-b border-surfaceBorder/40 text-left">
             <Th>Subnet</Th>
             <Th>Network</Th>
             <Th>Broadcast</Th>
@@ -198,10 +198,10 @@ function ResultTable({ rows }) {
         </thead>
         <tbody>
           {rows.map((row, i) => (
-            <tr key={i} className="border-b border-line last:border-0">
-              <Td className="text-ink font-medium">{row.label}</Td>
+            <tr key={i} className="border-b border-surfaceBorder/30 last:border-0">
+              <Td className="text-ink font-semibold">{row.label}</Td>
               {row.error ? (
-                <td colSpan={4} className="px-4 py-2.5 text-red-600 font-mono text-xs">
+                <td colSpan={4} className="px-4 py-2.5 text-red-500 font-mono text-xs">
                   {row.error}
                 </td>
               ) : (
@@ -223,7 +223,7 @@ function ResultTable({ rows }) {
 }
 
 function Th({ children }) {
-  return <th className="px-4 py-2.5 text-xs font-medium text-muted whitespace-nowrap">{children}</th>
+  return <th className="px-4 py-2.5 text-xs font-semibold text-muted whitespace-nowrap">{children}</th>
 }
 function Td({ children, mono, className = '' }) {
   return (

@@ -142,8 +142,7 @@ export function calcSubnetInfo(ipInt, prefix) {
 
 // Per-octet binary breakdown, each bit flagged as network/host, for the
 // visual bit diagram in the Subnet Calculator.
-export function binaryBreakdown(ipInt, prefix) {
-  const bits = ipInt.toString(2).padStart(32, '0').split('')
+export function binaryBreakdown(ipInt, prefix) {  const bits = ipInt.toString(2).padStart(32, '0').split('')
   const octets = [0, 1, 2, 3].map((octetIdx) => {
     const octetBits = bits.slice(octetIdx * 8, octetIdx * 8 + 8)
     return octetBits.map((bit, bitIdx) => {
@@ -152,6 +151,15 @@ export function binaryBreakdown(ipInt, prefix) {
     })
   })
   return octets
+}
+
+// Plain dotted-binary string for a single IP value (e.g. for the hover
+// popup) — returns null when the string isn't a valid IPv4 address, so
+// non-IP result cards (host count, IP class, etc.) simply don't match.
+export function ipStringToBinary(value) {
+  const parsed = parseIPv4(value)
+  if (!parsed.valid) return null
+  return parsed.octets.map((o) => o.toString(2).padStart(8, '0')).join('.')
 }
 
 // ---------------------------------------------------------------------------

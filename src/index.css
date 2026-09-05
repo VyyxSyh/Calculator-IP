@@ -2,6 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Light mode — icy blue-white base so the glass blur has something
+     to pick up, dark gray (not pure black) text for softness. */
+  --bg-base: 243 246 251; /* #F3F6FB */
+  --text-primary: 30 41 59; /* slate-800 */
+  --text-secondary: 100 111 128; /* slate-500-ish */
+  --surface: 255 255 255; /* white glass surfaces, alpha applied via /NN */
+  --surface-border: 255 255 255;
+  --accent: 2 132 199; /* sky-600 — text/links/highlights */
+  --accent-tint: 224 242 254; /* sky-100 — soft badges/hover */
+  --accent-solid: 2 132 199; /* sky-600 — solid buttons, fixed across themes */
+}
+
+.dark {
+  /* Dark mode — navy charcoal, not pure black; brighter accent for
+     legibility against the dark surface. */
+  --bg-base: 13 19 31; /* #0D131F */
+  --text-primary: 226 232 240; /* slate-200 */
+  --text-secondary: 148 163 184; /* slate-400 */
+  --surface: 24 33 48;
+  --surface-border: 255 255 255;
+  --accent: 56 189 248; /* sky-400 — brighter so it pops on dark bg */
+  --accent-tint: 12 40 56;
+  --accent-solid: 2 132 199; /* same solid tone as light mode */
+}
+
 body {
-  @apply bg-paper text-ink antialiased;
+  @apply bg-base text-ink antialiased;
+  transition: background-color 300ms ease;
+}
+
+/* Shared glass-surface recipe: translucent background + blur + soft
+   border + soft shadow. Applied via the `.glass` utility so every card,
+   navbar, and dropdown gets the exact same recipe (per design.md §9:
+   one glass effect used everywhere, not several bespoke ones). */
+.glass {
+  @apply bg-surface/60 dark:bg-surface/50 backdrop-blur-glass border border-surfaceBorder/50 dark:border-surfaceBorder/10 shadow-glass dark:shadow-glass-dark;
+}
+
+/* Content that must be visible but never selectable/copyable — used by
+   the binary hover-popup so it reads as a reference, not a copy source. */
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

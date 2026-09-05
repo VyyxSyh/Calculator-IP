@@ -47,7 +47,7 @@ export default function CidrSummarization() {
         description="Masukkan beberapa network (satu per baris, format IP/prefix) untuk dicari satu blok CIDR gabungan yang mencakup semuanya."
       />
 
-      <div className="bg-panel border border-line rounded p-5">
+      <div className="glass rounded-3xl p-5">
         <Field label="Daftar network (satu per baris)">
           <textarea
             value={text}
@@ -61,7 +61,7 @@ export default function CidrSummarization() {
         {lineErrors.length > 0 && (
           <ul className="mt-3 space-y-1">
             {lineErrors.map((err, i) => (
-              <li key={i} className="text-sm text-red-600">
+              <li key={i} className="text-sm text-red-500">
                 {err}
               </li>
             ))}
@@ -73,8 +73,12 @@ export default function CidrSummarization() {
         <div>
           <h3 className="text-sm font-semibold text-ink mb-3">Hasil agregasi</h3>
           <div className="grid grid-cols-2 gap-3">
-            <ResultCard label="CIDR gabungan" value={`${aggregateInfo.network}/${aggregateInfo.prefix}`} />
-            <ResultCard label="Subnet mask" value={aggregateInfo.mask} />
+            <ResultCard
+              label="CIDR gabungan"
+              value={`${aggregateInfo.network}/${aggregateInfo.prefix}`}
+              binaryOf={aggregateInfo.network}
+            />
+            <ResultCard label="Subnet mask" value={aggregateInfo.mask} binaryOf={aggregateInfo.mask} />
             <ResultCard
               label="Rentang mencakup"
               value={`${aggregateInfo.network} – ${aggregateInfo.broadcast}`}
@@ -91,20 +95,20 @@ export default function CidrSummarization() {
       )}
 
       {blocks.length > 0 && lineErrors.length === 0 && (
-        <div className="bg-panel border border-line rounded overflow-x-auto">
+        <div className="glass rounded-3xl overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-line text-left">
-                <th className="px-4 py-2.5 text-xs font-medium text-muted">Input</th>
-                <th className="px-4 py-2.5 text-xs font-medium text-muted">Network</th>
-                <th className="px-4 py-2.5 text-xs font-medium text-muted">Broadcast</th>
+              <tr className="border-b border-surfaceBorder/40 text-left">
+                <th className="px-4 py-2.5 text-xs font-semibold text-muted">Input</th>
+                <th className="px-4 py-2.5 text-xs font-semibold text-muted">Network</th>
+                <th className="px-4 py-2.5 text-xs font-semibold text-muted">Broadcast</th>
               </tr>
             </thead>
             <tbody>
               {blocks.map((b, i) => {
                 const info = calcSubnetInfo(b.networkInt, b.prefix)
                 return (
-                  <tr key={i} className="border-b border-line last:border-0">
+                  <tr key={i} className="border-b border-surfaceBorder/30 last:border-0">
                     <td className="px-4 py-2.5 font-mono text-xs text-muted whitespace-nowrap">
                       {b.original}
                     </td>

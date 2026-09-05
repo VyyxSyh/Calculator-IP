@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
   parseIPv4,
   octetsToInt,
@@ -7,8 +8,12 @@ import {
   calcSubnetInfo,
   binaryBreakdown,
   wildcardFromPrefix,
+  ipStringToBinary,
 } from '../utils/ipUtils'
+import { useCanHover } from '../hooks/useCanHover'
 import BitVisualizer from './BitVisualizer'
+
+const EASE = [0.22, 1, 0.36, 1]
 
 export default function SubnetCalculator() {
   const [ipInput, setIpInput] = useState('192.168.1.10')
@@ -47,7 +52,7 @@ export default function SubnetCalculator() {
         description="Masukkan alamat IP dan panjang prefix (atau subnet mask) untuk melihat rincian subnet secara lengkap."
       />
 
-      <div className="bg-panel border border-line rounded p-5">
+      <div className="glass rounded-3xl p-5">
         <div className="grid sm:grid-cols-[1fr_auto] gap-4 items-start">
           <Field label="Alamat IP" error={!ipCheck.valid ? ipCheck.error : null}>
             <input
@@ -93,12 +98,25 @@ export default function SubnetCalculator() {
       {result && (
         <>
           <div>
-            <h3 className="text-sm font-semibold text-ink mb-3">Ringkasan</h3>
+            <h3 className="text-sm font-semibold text-ink mb-3">
+              Ringkasan
+              <span className="hidden lg:inline text-xs font-normal text-muted ml-2">
+                (arahkan kursor ke kartu untuk lihat biner)
+              </span>
+            </h3>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-              <ResultCard label="Network address" value={`${result.info.network}/${result.info.prefix}`} />
-              <ResultCard label="Broadcast address" value={result.info.broadcast} />
-              <ResultCard label="Subnet mask" value={result.info.mask} />
-              <ResultCard label="Wildcard mask" value={intAwareWildcard(result.info.prefix)} />
+              <ResultCard
+                label="Network address"
+                value={`${result.info.network}/${result.info.prefix}`}
+                binaryOf={result.info.network}
+              />
+              <ResultCard label="Broadcast address" value={result.info.broadcast} binaryOf={result.info.broadcast} />
+              <ResultCard label="Subnet mask" value={result.info.mask} binaryOf={result.info.mask} />
+              <ResultCard
+                label="Wildcard mask"
+                value={intAwareWildcard(result.info.prefix)}
+                binaryOf={intAwareWildcard(result.info.prefix)}
+              />
               <ResultCard
                 label="Rentang host valid"
                 value={
@@ -114,7 +132,7 @@ export default function SubnetCalculator() {
             </div>
           </div>
 
-          <div className="bg-panel border border-line rounded p-5">
+          <div className="glass rounded-3xl p-5">
             <h3 className="text-sm font-semibold text-ink mb-4">Representasi biner</h3>
             <BitVisualizer octets={result.bits} decimalOctets={result.info.ip.split('.')} />
           </div>
@@ -137,7 +155,7 @@ function intAwareWildcard(prefix) {
 export function ToolHeader({ title, description }) {
   return (
     <div>
-      <h2 className="text-xl font-semibold text-ink">{title}</h2>
+      <h2 className="text-2xl font-extrabold text-ink">{title}</h2>
       <p className="text-sm text-muted mt-1 max-w-2xl">{description}</p>
     </div>
   )
@@ -146,28 +164,61 @@ export function ToolHeader({ title, description }) {
 export function Field({ label, children, error }) {
   return (
     <label className="block">
-      <span className="block text-xs font-medium text-muted mb-1.5">{label}</span>
+      <span className="block text-xs font-semibold text-muted mb-1.5">{label}</span>
       {children}
-      {error && <span className="block text-xs text-red-600 mt-1.5">{error}</span>}
+      {error && <span className="block text-xs text-red-500 mt-1.5">{error}</span>}
     </label>
   )
 }
 
 // A single result in its own block — used by Subnet Calculator and CIDR
 // Summarization so every field of a result reads as a distinct, scannable
-// unit rather than one long list.
-export function ResultCard({ label, value, wide }) {
+// unit. When `binaryOf` is a valid IPv4 string, hovering the card (desktop
+// only — gated by useCanHover) reveals its binary form in a small popup.
+// The popup fades/scales in smoothly but exits noticeably faster, and its
+// text is unselectable so it reads as a reference, not a copy source.
+export function ResultCard({ label, value, wide, binaryOf }) {
+  const canHover = useCanHover()
+  const [hovered, setHovered] = useState(false)
+  const binary = binaryOf ? ipStringToBinary(binaryOf) : null
+  const showPopup = canHover && !!binary && hovered
+
   return (
-    <div className={`border border-line rounded p-3 bg-panel ${wide ? 'col-span-2' : ''}`}>
+    <div
+      className={`relative rounded-2xl p-3 bg-surface/40 dark:bg-surface/30 border border-surfaceBorder/50 dark:border-surfaceBorder/10 transition-colors ${wide ? 'col-span-2' : ''}`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <p className="text-xs text-muted">{label}</p>
       <p className="text-sm font-mono text-ink mt-1 break-all">{value}</p>
+
+      <AnimatePresence>
+        {showPopup && (
+          <motion.div
+            variants={popupVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            className="select-none absolute left-1/2 -translate-x-1/2 top-full mt-2 z-20 whitespace-nowrap px-3 py-2 rounded-xl bg-slate-900 text-slate-50 dark:bg-slate-100 dark:text-slate-900 text-xs font-mono shadow-glass"
+          >
+            {binary}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
 
+// Enter is a touch slower/softer than exit — exit should feel snappier so
+// the popup doesn't linger once the pointer has moved on.
+const popupVariants = {
+  hidden: { opacity: 0, y: 6, scale: 0.96, transition: { duration: 0.12, ease: 'easeIn' } },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.18, ease: EASE } },
+}
+
 export function Row({ label, value }) {
   return (
-    <div className="flex justify-between sm:justify-start sm:gap-3 border-b border-line py-1.5 sm:border-0 sm:py-0">
+    <div className="flex justify-between sm:justify-start sm:gap-3 border-b border-surfaceBorder/40 py-1.5 sm:border-0 sm:py-0">
       <dt className="text-sm text-muted">{label}</dt>
       <dd className="text-sm font-mono text-ink text-right sm:text-left">{value}</dd>
     </div>
@@ -175,14 +226,14 @@ export function Row({ label, value }) {
 }
 
 export const inputClass =
-  'w-full font-mono text-sm border border-line rounded px-3 py-2 bg-white text-ink focus:outline-none focus:ring-2 focus:ring-signal-400 focus:border-signal-400'
+  'w-full font-mono text-sm rounded-xl px-4 py-2.5 bg-surface/60 dark:bg-surface/40 border border-surfaceBorder/50 dark:border-surfaceBorder/10 text-ink placeholder:text-muted/60 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-shadow'
 
 export const buttonFocusClass =
-  'focus:outline-none focus-visible:ring-2 focus-visible:ring-signal-400 focus-visible:ring-offset-1'
+  'focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-base'
 
 function ModeToggle({ mode, onChange }) {
   return (
-    <div className="flex border border-line rounded overflow-hidden h-fit">
+    <div className="flex rounded-full bg-surface/60 dark:bg-surface/40 border border-surfaceBorder/50 dark:border-surfaceBorder/10 p-1 h-fit">
       {[
         { id: 'prefix', label: 'CIDR' },
         { id: 'mask', label: 'Mask' },
@@ -191,10 +242,10 @@ function ModeToggle({ mode, onChange }) {
           key={opt.id}
           onClick={() => onChange(opt.id)}
           className={
-            'px-3 py-2 text-xs font-medium ' +
+            'px-3 py-1.5 text-xs font-semibold rounded-full transition-colors duration-200 ' +
             buttonFocusClass +
             ' ' +
-            (mode === opt.id ? 'bg-signal-500 text-white' : 'bg-white text-muted hover:bg-paper')
+            (mode === opt.id ? 'bg-accentSolid text-white' : 'text-muted hover:text-ink')
           }
         >
           {opt.label}
