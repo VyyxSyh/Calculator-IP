@@ -98,7 +98,7 @@ export default function CidrSummarization() {
         <div className="glass rounded-3xl overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-surfaceBorder/40 text-left">
+              <tr className="border-b border-surfaceBorder/16 text-left">
                 <th className="px-4 py-2.5 text-xs font-semibold text-muted">Input</th>
                 <th className="px-4 py-2.5 text-xs font-semibold text-muted">Network</th>
                 <th className="px-4 py-2.5 text-xs font-semibold text-muted">Broadcast</th>
@@ -108,7 +108,7 @@ export default function CidrSummarization() {
               {blocks.map((b, i) => {
                 const info = calcSubnetInfo(b.networkInt, b.prefix)
                 return (
-                  <tr key={i} className="border-b border-surfaceBorder/30 last:border-0">
+                  <tr key={i} className="border-b border-surfaceBorder/12 last:border-0">
                     <td className="px-4 py-2.5 font-mono text-xs text-muted whitespace-nowrap">
                       {b.original}
                     </td>

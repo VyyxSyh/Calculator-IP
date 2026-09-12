@@ -4,7 +4,7 @@ export default function BitVisualizer({ octets, decimalOctets }) {
       {octets.map((octetBits, idx) => (
         <div
           key={idx}
-          className="rounded-2xl p-2.5 bg-surface/40 dark:bg-surface/30 border border-surfaceBorder/50 dark:border-surfaceBorder/10"
+          className="rounded-2xl p-2.5 bg-surface/40 dark:bg-surface/30 border border-surfaceBorder/20"
         >
           <div className="flex justify-between mb-1.5">
             <span className="text-xs text-muted">Oktet {idx + 1}</span>
@@ -20,7 +20,7 @@ export default function BitVisualizer({ octets, decimalOctets }) {
                   'flex-1 text-center py-1 rounded-md ' +
                   (b.isNetwork
                     ? 'bg-accentSolid text-white'
-                    : 'bg-surface/70 dark:bg-surface/50 text-ink border border-surfaceBorder/40 dark:border-surfaceBorder/10')
+                    : 'bg-surface/70 dark:bg-surface/50 text-ink border border-surfaceBorder/16')
                 }
               >
                 {b.bit}
@@ -34,7 +34,7 @@ export default function BitVisualizer({ octets, decimalOctets }) {
           <span className="inline-block w-3 h-3 bg-accentSolid rounded-full" /> bit network
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="inline-block w-3 h-3 bg-surface/70 dark:bg-surface/50 border border-surfaceBorder/50 rounded-full" /> bit host
+          <span className="inline-block w-3 h-3 bg-surface/70 dark:bg-surface/50 border border-surfaceBorder/20 rounded-full" /> bit host
         </span>
       </div>
     </div>

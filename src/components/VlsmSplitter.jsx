@@ -1,6 +1,9 @@
 import { useState, useMemo } from 'react'
+import { motion } from 'framer-motion'
 import { parseIPv4, octetsToInt, isValidPrefix, vlsmAllocate, equalSplit } from '../utils/ipUtils'
 import { ToolHeader, Field, inputClass, buttonFocusClass } from './SubnetCalculator'
+
+const EASE = [0.22, 1, 0.36, 1]
 
 export default function VlsmSplitter() {
   const [ipInput, setIpInput] = useState('192.168.1.0')
@@ -85,7 +88,7 @@ export default function VlsmSplitter() {
         </div>
       </div>
 
-      <div className="flex rounded-full bg-surface/60 dark:bg-surface/40 border border-surfaceBorder/50 dark:border-surfaceBorder/10 p-1 w-fit">
+      <div className="flex rounded-full bg-surface/60 dark:bg-surface/40 border border-surfaceBorder/20 p-1 w-fit">
         {[
           { id: 'equal', label: 'Bagi rata (jumlah subnet)' },
           { id: 'vlsm', label: 'VLSM (kebutuhan host)' },
@@ -94,13 +97,20 @@ export default function VlsmSplitter() {
             key={opt.id}
             onClick={() => setMode(opt.id)}
             className={
-              'px-4 py-2 text-sm font-semibold rounded-full transition-colors duration-200 ' +
+              'relative px-4 py-2 text-sm font-semibold rounded-full transition-colors duration-200 ' +
               buttonFocusClass +
               ' ' +
-              (mode === opt.id ? 'bg-accentSolid text-white' : 'text-muted hover:text-ink')
+              (mode === opt.id ? 'text-white' : 'text-muted hover:text-ink')
             }
           >
-            {opt.label}
+            {mode === opt.id && (
+              <motion.span
+                layoutId="vlsm-mode-indicator"
+                className="absolute inset-0 bg-accentSolid rounded-full"
+                transition={{ duration: 0.25, ease: EASE }}
+              />
+            )}
+            <span className="relative z-10">{opt.label}</span>
           </button>
         ))}
       </div>
@@ -188,7 +198,7 @@ function ResultTable({ rows }) {
     <div className="glass rounded-3xl overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-surfaceBorder/40 text-left">
+          <tr className="border-b border-surfaceBorder/16 text-left">
             <Th>Subnet</Th>
             <Th>Network</Th>
             <Th>Broadcast</Th>
@@ -198,7 +208,7 @@ function ResultTable({ rows }) {
         </thead>
         <tbody>
           {rows.map((row, i) => (
-            <tr key={i} className="border-b border-surfaceBorder/30 last:border-0">
+            <tr key={i} className="border-b border-surfaceBorder/12 last:border-0">
               <Td className="text-ink font-semibold">{row.label}</Td>
               {row.error ? (
                 <td colSpan={4} className="px-4 py-2.5 text-red-500 font-mono text-xs">

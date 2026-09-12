@@ -9,7 +9,7 @@
   --text-primary: 30 41 59; /* slate-800 */
   --text-secondary: 100 111 128; /* slate-500-ish */
   --surface: 255 255 255; /* white glass surfaces, alpha applied via /NN */
-  --surface-border: 255 255 255;
+  --surface-border: 15 23 42; /* slate-900 — a touch darker than the base bg so the thin border actually reads on a light background */
   --accent: 2 132 199; /* sky-600 — text/links/highlights */
   --accent-tint: 224 242 254; /* sky-100 — soft badges/hover */
   --accent-solid: 2 132 199; /* sky-600 — solid buttons, fixed across themes */
@@ -38,7 +38,7 @@ body {
    navbar, and dropdown gets the exact same recipe (per design.md §9:
    one glass effect used everywhere, not several bespoke ones). */
 .glass {
-  @apply bg-surface/60 dark:bg-surface/50 backdrop-blur-glass border border-surfaceBorder/50 dark:border-surfaceBorder/10 shadow-glass dark:shadow-glass-dark;
+  @apply bg-surface/60 dark:bg-surface/50 backdrop-blur-glass border border-surfaceBorder/20 shadow-glass dark:shadow-glass-dark;
 }
 
 /* Content that must be visible but never selectable/copyable — used by

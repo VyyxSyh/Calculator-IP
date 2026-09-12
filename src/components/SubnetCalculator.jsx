@@ -185,7 +185,7 @@ export function ResultCard({ label, value, wide, binaryOf }) {
 
   return (
     <div
-      className={`relative rounded-2xl p-3 bg-surface/40 dark:bg-surface/30 border border-surfaceBorder/50 dark:border-surfaceBorder/10 transition-colors ${wide ? 'col-span-2' : ''}`}
+      className={`relative rounded-2xl p-3 bg-surface/40 dark:bg-surface/30 border border-surfaceBorder/20 transition-colors ${wide ? 'col-span-2' : ''}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -218,7 +218,7 @@ const popupVariants = {
 
 export function Row({ label, value }) {
   return (
-    <div className="flex justify-between sm:justify-start sm:gap-3 border-b border-surfaceBorder/40 py-1.5 sm:border-0 sm:py-0">
+    <div className="flex justify-between sm:justify-start sm:gap-3 border-b border-surfaceBorder/16 py-1.5 sm:border-0 sm:py-0">
       <dt className="text-sm text-muted">{label}</dt>
       <dd className="text-sm font-mono text-ink text-right sm:text-left">{value}</dd>
     </div>
@@ -226,29 +226,37 @@ export function Row({ label, value }) {
 }
 
 export const inputClass =
-  'w-full font-mono text-sm rounded-xl px-4 py-2.5 bg-surface/60 dark:bg-surface/40 border border-surfaceBorder/50 dark:border-surfaceBorder/10 text-ink placeholder:text-muted/60 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-shadow'
+  'w-full font-mono text-sm rounded-xl px-4 py-2.5 bg-surface/60 dark:bg-surface/40 border border-surfaceBorder/20 text-ink placeholder:text-muted/60 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-shadow'
 
 export const buttonFocusClass =
   'focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-base'
 
 function ModeToggle({ mode, onChange }) {
+  const options = [
+    { id: 'prefix', label: 'CIDR' },
+    { id: 'mask', label: 'Mask' },
+  ]
   return (
-    <div className="flex rounded-full bg-surface/60 dark:bg-surface/40 border border-surfaceBorder/50 dark:border-surfaceBorder/10 p-1 h-fit">
-      {[
-        { id: 'prefix', label: 'CIDR' },
-        { id: 'mask', label: 'Mask' },
-      ].map((opt) => (
+    <div className="flex rounded-full bg-surface/60 dark:bg-surface/40 border border-surfaceBorder/20 p-1 h-fit">
+      {options.map((opt) => (
         <button
           key={opt.id}
           onClick={() => onChange(opt.id)}
           className={
-            'px-3 py-1.5 text-xs font-semibold rounded-full transition-colors duration-200 ' +
+            'relative px-3 py-1.5 text-xs font-semibold rounded-full transition-colors duration-200 ' +
             buttonFocusClass +
             ' ' +
-            (mode === opt.id ? 'bg-accentSolid text-white' : 'text-muted hover:text-ink')
+            (mode === opt.id ? 'text-white' : 'text-muted hover:text-ink')
           }
         >
-          {opt.label}
+          {mode === opt.id && (
+            <motion.span
+              layoutId="subnet-mode-indicator"
+              className="absolute inset-0 bg-accentSolid rounded-full"
+              transition={{ duration: 0.25, ease: EASE }}
+            />
+          )}
+          <span className="relative z-10">{opt.label}</span>
         </button>
       ))}
     </div>
