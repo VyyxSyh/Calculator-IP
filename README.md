@@ -17,7 +17,7 @@ Hitung subnet, bagi network dengan VLSM, dan gabungkan CIDR — semua dalam satu
 
 <br/>
 
-[**🚀 Coba Demo**](https://calculator-ipv4.vercel.app/) · [Fitur](#-fitur) · [Tech Stack](#️-tech-stack) · [Instalasi](#-menjalankan-secara-lokal)
+[**🚀 Coba Demo**](https://0ctet.vercel.app/) · [Fitur](#-fitur) · [Tech Stack](#️-tech-stack) · [Instalasi](#-menjalankan-secara-lokal)
 
 </div>
 
