@@ -7,14 +7,12 @@ import AlignedBinary from './AlignedBinary'
 export default function LearningSubnetting() {
   const [ipInput, setIpInput] = useState('192.168.10.1')
   const [prefixInput, setPrefixInput] = useState('25')
-
   const ipCheck = useMemo(() => parseIPv4(ipInput), [ipInput])
   const prefixCheck = useMemo(() => {
     const n = Number(prefixInput)
     if (!isValidPrefix(n)) return { valid: false, error: 'Prefix harus berupa angka bulat 0–32' }
     return { valid: true, prefix: n }
   }, [prefixInput])
-
   const steps = useMemo(() => {
     if (!ipCheck.valid || !prefixCheck.valid) return null
     return computeSubnettingSteps(ipCheck.octets, prefixCheck.prefix)
@@ -26,7 +24,6 @@ export default function LearningSubnetting() {
         title="Learning Subnetting"
         description="Lihat proses hitung subnetting secara manual, langkah demi langkah lengkap dengan rumus — bukan cuma hasil akhirnya."
       />
-
       <div className="glass rounded-3xl p-5">
         <div className="grid sm:grid-cols-2 gap-4">
           <Field label="Alamat IP" error={!ipCheck.valid ? ipCheck.error : null}>
@@ -51,7 +48,6 @@ export default function LearningSubnetting() {
           </Field>
         </div>
       </div>
-
       {steps && (
         <div className="space-y-4">
           <Step1SubnetMask prefix={prefixCheck.prefix} data={steps.mask} />
@@ -211,51 +207,101 @@ function Step6BroadcastId({ data }) {
 }
 
 // Step 7 — summary table of every subnet formed by the block size.
+// Desktop: transpose table (columns = subnets, rows = fields) — matches handwritten notes.
+// Mobile: card-based layout (one card per subnet), no horizontal scrolling.
 function Step7Summary({ data }) {
   return (
     <StepCard number={7} title="Tabel Ringkasan Seluruh Subnet">
-      <div className="overflow-x-auto">
+      {/* Desktop: transpose table */}
+      <div className="hidden sm:block overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-surfaceBorder/16 text-left">
-              <Th>Subnet / Network ID</Th>
-              <Th>Host Pertama</Th>
-              <Th>Host Terakhir</Th>
-              <Th>Broadcast ID</Th>
+              <Th></Th>
+              {data.subnetRows.map((row, i) => (
+                <Th key={i} className="text-center">
+                  Subnet {i + 1}
+                </Th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            {data.subnetRows.map((row, i) => (
-              <tr key={i} className="border-b border-surfaceBorder/12 last:border-0">
-                <Td mono>{`${row.network}/${row.prefix}`}</Td>
-                <Td mono>{row.usableHosts > 0 ? row.firstHost : '-'}</Td>
-                <Td mono>{row.usableHosts > 0 ? row.lastHost : '-'}</Td>
-                <Td mono>{row.broadcast}</Td>
-              </tr>
-            ))}
+            <tr className="border-b border-surfaceBorder/12">
+              <Td className="text-muted font-semibold">Network ID</Td>
+              {data.subnetRows.map((row, i) => (
+                <Td key={i} mono className="text-center">
+                  {`${row.network}/${row.prefix}`}
+                </Td>
+              ))}
+            </tr>
+            <tr className="border-b border-surfaceBorder/12">
+              <Td className="text-muted font-semibold">First Host</Td>
+              {data.subnetRows.map((row, i) => (
+                <Td key={i} mono className="text-center">
+                  {row.usableHosts > 0 ? row.firstHost : '-'}
+                </Td>
+              ))}
+            </tr>
+            <tr className="border-b border-surfaceBorder/12">
+              <Td className="text-muted font-semibold">Last Host</Td>
+              {data.subnetRows.map((row, i) => (
+                <Td key={i} mono className="text-center">
+                  {row.usableHosts > 0 ? row.lastHost : '-'}
+                </Td>
+              ))}
+            </tr>
+            <tr>
+              <Td className="text-muted font-semibold">Broadcast</Td>
+              {data.subnetRows.map((row, i) => (
+                <Td key={i} mono className="text-center">
+                  {row.broadcast}
+                </Td>
+              ))}
+            </tr>
           </tbody>
         </table>
       </div>
-      {data.truncated && (
-        <Note>
-          Menampilkan {data.rowsToShow} dari {data.totalSiblingSubnets.toLocaleString('id-ID')} subnet
-          (dipotong demi performa halaman).
-        </Note>
-      )}
-      {data.countMismatchNote && (
-        <Note>
-          Catatan: tabel ini menampilkan subnet-subnet yang berbagi oktet-oktet sebelum blok subnet di
-          atas. Kalau prefix baru jauh dari prefix default kelasnya (borrowed bits melewati satu oktet),
-          jumlah barisnya bisa beda dari hasil Langkah 2 — itu wajar, bukan bug.
-        </Note>
-      )}
+
+      {/* Mobile: card-based layout — no horizontal scroll */}
+      <div className="sm:hidden grid grid-cols-1 gap-3">
+        {data.subnetRows.map((row, i) => (
+          <div key={i} className="rounded-2xl p-4 bg-surface/40 dark:bg-surface/30 border border-surfaceBorder/20">
+            <h4 className="text-sm font-semibold text-accent mb-3">Subnet {i + 1}</h4>
+            <div className="space-y-2 text-sm">
+              <div className="flex justify-between items-center">
+                <span className="text-muted text-xs">Network ID</span>
+                <span className="font-mono text-ink text-xs">{`${row.network}/${row.prefix}`}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-muted text-xs">First Host</span>
+                <span className="font-mono text-ink text-xs">{row.usableHosts > 0 ? row.firstHost : '-'}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-muted text-xs">Last Host</span>
+                <span className="font-mono text-ink text-xs">{row.usableHosts > 0 ? row.lastHost : '-'}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-muted text-xs">Broadcast</span>
+                <span className="font-mono text-ink text-xs">{row.broadcast}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </StepCard>
   )
 }
 
-function Th({ children }) {
-  return <th className="px-4 py-2.5 text-xs font-semibold text-muted whitespace-nowrap">{children}</th>
+function Th({ children, className = '' }) {
+  return (
+    <th className={`px-4 py-2.5 text-xs font-semibold text-muted whitespace-nowrap ${className}`}>
+      {children}
+    </th>
+  )
 }
-function Td({ children, mono }) {
-  return <td className={`px-4 py-2.5 whitespace-nowrap ${mono ? 'font-mono' : ''}`}>{children}</td>
+
+function Td({ children, mono, className = '' }) {
+  return (
+    <td className={`px-4 py-2.5 whitespace-nowrap ${mono ? 'font-mono' : ''} ${className}`}>{children}</td>
+  )
 }
