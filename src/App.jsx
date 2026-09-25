@@ -4,11 +4,13 @@ import Sidebar from './components/Sidebar'
 import SubnetCalculator from './components/SubnetCalculator'
 import VlsmSplitter from './components/VlsmSplitter'
 import CidrSummarization from './components/CidrSummarization'
+import LearningSubnetting from './components/LearningSubnetting'
 
 const PANELS = {
   subnet: SubnetCalculator,
   vlsm: VlsmSplitter,
   cidr: CidrSummarization,
+  learning: LearningSubnetting,
 }
 
 export default function App() {

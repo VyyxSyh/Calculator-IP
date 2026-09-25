@@ -9,6 +9,7 @@ const TOOLS = [
   { id: 'subnet', label: 'Subnet Calculator', hint: 'IP + prefix → detail lengkap' },
   { id: 'vlsm', label: 'VLSM / Subnet Splitter', hint: 'Bagi satu network jadi banyak' },
   { id: 'cidr', label: 'CIDR Summarization', hint: 'Gabung beberapa network' },
+  { id: 'learning', label: 'Learning Subnetting', hint: 'Step-by-step manual + rumus' },
 ]
 
 const EASE = [0.22, 1, 0.36, 1]
