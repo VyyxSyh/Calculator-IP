@@ -91,7 +91,6 @@ function Note({ children }) {
   return <p className="text-xs text-muted mt-3 leading-relaxed">{children}</p>
 }
 
-// Step 1 — prefix as binary per octet, then converted to decimal (the mask).
 function Step1SubnetMask({ prefix, data }) {
   return (
     <StepCard number={1} title="Subnet Mask">
@@ -110,7 +109,6 @@ function Step1SubnetMask({ prefix, data }) {
   )
 }
 
-// Step 2 — number of subnets = 2^x.
 function Step2SubnetCount({ prefix, data }) {
   return (
     <StepCard number={2} title="Jumlah Subnet">
@@ -134,7 +132,6 @@ function Step2SubnetCount({ prefix, data }) {
   )
 }
 
-// Step 3 — hosts per subnet = 2^y - 2.
 function Step3HostCount({ data }) {
   return (
     <StepCard number={3} title="Jumlah Host per Subnet">
@@ -148,7 +145,6 @@ function Step3HostCount({ data }) {
   )
 }
 
-// Step 4 — block size = 256 - (relevant mask octet value).
 function Step4BlockSize({ data }) {
   return (
     <StepCard number={4} title="Blok Subnet (Block Size)">
@@ -166,7 +162,6 @@ function Step4BlockSize({ data }) {
   )
 }
 
-// Step 5 — Network ID = IP AND Mask, shown per-octet binary stacked.
 function Step5NetworkId({ prefix, data }) {
   return (
     <StepCard number={5} title="Network ID">
@@ -186,7 +181,6 @@ function Step5NetworkId({ prefix, data }) {
   )
 }
 
-// Step 6 — Broadcast ID = Network ID OR Wildcard mask.
 function Step6BroadcastId({ data }) {
   return (
     <StepCard number={6} title="Broadcast ID">
@@ -206,84 +200,30 @@ function Step6BroadcastId({ data }) {
   )
 }
 
-// Step 7 — summary table of every subnet formed by the block size.
-// Desktop: transpose table (columns = subnets, rows = fields) — matches handwritten notes.
-// Mobile: card-based layout (one card per subnet), no horizontal scrolling.
+// Step 7 — grid cards per subnet, wrap otomatis sesuai lebar layar.
+// Tiap card = 1 subnet, isi 4 baris data (Network, First, Last, Broadcast) tanpa label kiri.
+// Warna: Network & Broadcast pakai accent, First/Last pakai ink biasa.
 function Step7Summary({ data }) {
   return (
     <StepCard number={7} title="Tabel Ringkasan Seluruh Subnet">
-      {/* Desktop: transpose table */}
-      <div className="hidden sm:block overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b border-surfaceBorder/16 text-left">
-              <Th></Th>
-              {data.subnetRows.map((row, i) => (
-                <Th key={i} className="text-center">
-                  Subnet {i + 1}
-                </Th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            <tr className="border-b border-surfaceBorder/12">
-              <Td className="text-muted font-semibold">Network ID</Td>
-              {data.subnetRows.map((row, i) => (
-                <Td key={i} mono className="text-center">
-                  {`${row.network}/${row.prefix}`}
-                </Td>
-              ))}
-            </tr>
-            <tr className="border-b border-surfaceBorder/12">
-              <Td className="text-muted font-semibold">First Host</Td>
-              {data.subnetRows.map((row, i) => (
-                <Td key={i} mono className="text-center">
-                  {row.usableHosts > 0 ? row.firstHost : '-'}
-                </Td>
-              ))}
-            </tr>
-            <tr className="border-b border-surfaceBorder/12">
-              <Td className="text-muted font-semibold">Last Host</Td>
-              {data.subnetRows.map((row, i) => (
-                <Td key={i} mono className="text-center">
-                  {row.usableHosts > 0 ? row.lastHost : '-'}
-                </Td>
-              ))}
-            </tr>
-            <tr>
-              <Td className="text-muted font-semibold">Broadcast</Td>
-              {data.subnetRows.map((row, i) => (
-                <Td key={i} mono className="text-center">
-                  {row.broadcast}
-                </Td>
-              ))}
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      {/* Mobile: card-based layout — no horizontal scroll */}
-      <div className="sm:hidden grid grid-cols-1 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
         {data.subnetRows.map((row, i) => (
-          <div key={i} className="rounded-2xl p-4 bg-surface/40 dark:bg-surface/30 border border-surfaceBorder/20">
-            <h4 className="text-sm font-semibold text-accent mb-3">Subnet {i + 1}</h4>
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between items-center">
-                <span className="text-muted text-xs">Network ID</span>
-                <span className="font-mono text-ink text-xs">{`${row.network}/${row.prefix}`}</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-muted text-xs">First Host</span>
-                <span className="font-mono text-ink text-xs">{row.usableHosts > 0 ? row.firstHost : '-'}</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-muted text-xs">Last Host</span>
-                <span className="font-mono text-ink text-xs">{row.usableHosts > 0 ? row.lastHost : '-'}</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-muted text-xs">Broadcast</span>
-                <span className="font-mono text-ink text-xs">{row.broadcast}</span>
-              </div>
+          <div
+            key={i}
+            className="rounded-2xl p-4 bg-surface/40 dark:bg-surface/30 border border-surfaceBorder/20 flex flex-col"
+          >
+            <h4 className="text-xs font-bold text-accent mb-3 pb-2 border-b border-surfaceBorder/16">
+              Subnet {i + 1}
+            </h4>
+            <div className="space-y-2 flex-1">
+              <p className="font-mono text-sm text-accent break-all">{row.network}</p>
+              <p className="font-mono text-sm text-ink break-all">
+                {row.usableHosts > 0 ? row.firstHost : '—'}
+              </p>
+              <p className="font-mono text-sm text-ink break-all">
+                {row.usableHosts > 0 ? row.lastHost : '—'}
+              </p>
+              <p className="font-mono text-sm text-accent break-all">{row.broadcast}</p>
             </div>
           </div>
         ))}
@@ -292,16 +232,3 @@ function Step7Summary({ data }) {
   )
 }
 
-function Th({ children, className = '' }) {
-  return (
-    <th className={`px-4 py-2.5 text-xs font-semibold text-muted whitespace-nowrap ${className}`}>
-      {children}
-    </th>
-  )
-}
-
-function Td({ children, mono, className = '' }) {
-  return (
-    <td className={`px-4 py-2.5 whitespace-nowrap ${mono ? 'font-mono' : ''} ${className}`}>{children}</td>
-  )
-}
